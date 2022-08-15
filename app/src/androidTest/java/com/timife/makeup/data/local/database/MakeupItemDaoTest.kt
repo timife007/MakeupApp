@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class MakeupItemDaoTest {
 
+    //Helps avoid concurrency, run each process one after the other.
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -24,6 +25,8 @@ class MakeupItemDaoTest {
 
     @BeforeEach
     fun setUp() {
+        //an in memory database that is refreshed when process is killed, runs on main thread
+        //because this is a test case.
         database = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             MakeupDatabase::class.java

@@ -70,6 +70,7 @@ class MakeupListUseCase @Inject constructor(
         }
     }
 }
+    //Fetch all items by default
     suspend fun getAllItems():Flow<Resource<List<MakeupItem>>>{
         return flow {
             emit(Resource.Loading(true))
