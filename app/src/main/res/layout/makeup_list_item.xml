@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="brandItem"
+            type="com.timife.makeup.domain.model.MakeupItem" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:id="@+id/brand_list_item"
+        app:cardCornerRadius="8dp"
+        android:elevation="6dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:imageUrl="@{brandItem.imageLink}"
+                android:id="@+id/item_image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/brand_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_image"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/list_item"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="@{brandItem.name}" />
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brand_name"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:layout_margin="5dp"
+                android:textAppearance="@style/list_item"
+                android:layout_gravity="center"
+                android:text="@{ brandItem.productType}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

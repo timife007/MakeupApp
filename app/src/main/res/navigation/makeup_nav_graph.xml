@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/makeup_nav_graph"
+    app:startDestination="@id/makeupItemsFragment">
+
+    <fragment
+        android:id="@+id/makeupItemsFragment"
+        android:name="com.timife.makeup.presentation.makeupBrands.MakeupItemsFragment"
+        android:label="Makeup Items"
+        tools:layout="@layout/fragment_makeup_items">
+        <action
+            android:id="@+id/action_makeupItemsFragment_to_makeupDetailsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/makeupItemsFragment"
+            app:destination="@id/makeupDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/makeupDetailsFragment"
+        android:name="com.timife.makeup.presentation.makeupDetails.MakeupDetailsFragment"
+        android:label="Makeup Details"
+        tools:layout="@layout/fragment_makeup_details">
+        <argument
+            android:name="selectedMakeup"
+            app:argType="com.timife.makeup.domain.model.MakeupItem"/>
+
+    </fragment>
+</navigation>
