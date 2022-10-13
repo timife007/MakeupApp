@@ -6,27 +6,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.timife.makeup.domain.model.Brand
 import com.timife.makeup.domain.model.MakeupItem
-import com.timife.makeup.domain.use_cases.MakeupBrandsUseCase
-import com.timife.makeup.domain.use_cases.MakeupListUseCase
+import com.timife.makeup.domain.use_cases.GetBrands
+import com.timife.makeup.domain.use_cases.GetDefaultItems
+import com.timife.makeup.domain.use_cases.GetMakeupItems
 import com.timife.makeup.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MakeupItemsViewModel @Inject constructor(
-    private val getBrandsUseCase: MakeupBrandsUseCase,
-    private val getMakeupListUseCase: MakeupListUseCase
+    private val getBrandsUseCase: GetBrands,
+    private val getItems: GetMakeupItems,
+    private val getDefaultItems: GetDefaultItems
 ):ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean>
     get() = _loading
-
-    private val _itemLoading = MutableLiveData<Boolean>()
-    val itemLoading: LiveData<Boolean>
-        get() = _itemLoading
 
     private val _brandData = MutableLiveData<Resource<List<Brand>>>()
     val brandData : LiveData<Resource<List<Brand>>>
@@ -47,32 +44,36 @@ class MakeupItemsViewModel @Inject constructor(
 
     fun getMakeupItems(fetchFromRemote: Boolean = false,brand:String = ""){
         viewModelScope.launch {
-                getMakeupListUseCase.invoke(fetchFromRemote,brand).collect { resource->
+                 getItems(fetchFromRemote,brand).collect{ resource->
                     when(resource){
                         is Resource.Success ->{
                             _itemsData.value = resource
                         }
                         is Resource.Loading ->{
-                            _itemLoading.value = resource.isLoading
+                            _loading.value = resource.isLoading
                         }
 
-                        is Resource.Error ->Unit
+                        is Resource.Error -> {
+                            _itemsData.value = Resource.Error(message = resource.message,data = resource.data)
+                        }
                     }
                 }
         }
     }
     fun getAllMakeupItems(fetchFromRemote: Boolean = false){
         viewModelScope.launch {
-            getMakeupListUseCase.getAllItems().collect { resource->
+            getDefaultItems().collect { resource->
                 when(resource){
                     is Resource.Success ->{
                         _itemsData.value = resource
                     }
                     is Resource.Loading ->{
-                        _itemLoading.value = resource.isLoading
+                        _loading.value = resource.isLoading
                     }
 
-                    is Resource.Error ->Unit
+                    is Resource.Error ->{
+                        _itemsData.value = Resource.Error(message = resource.message, data = resource.data)
+                    }
                 }
             }
         }
@@ -90,7 +91,9 @@ class MakeupItemsViewModel @Inject constructor(
                         _loading.value = resource.isLoading
                     }
 
-                    is Resource.Error ->Unit
+                    is Resource.Error -> {
+                        _brandData.value = Resource.Error(data = resource.data, message = resource.message)
+                    }
                 }
             }
         }

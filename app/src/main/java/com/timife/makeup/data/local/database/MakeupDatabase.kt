@@ -11,6 +11,6 @@ import com.timife.makeup.data.local.model.MakeupItemEntity
     exportSchema = false
 )
 abstract class MakeupDatabase : RoomDatabase() {
-    abstract val dao: MakeupDao
+    abstract val dao: BrandDao
     abstract val makeupItemDao:MakeupItemDao
 }

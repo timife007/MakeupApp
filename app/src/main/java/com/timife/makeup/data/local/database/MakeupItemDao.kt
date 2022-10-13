@@ -17,9 +17,9 @@ interface MakeupItemDao {
     suspend fun clearAllMakeupItems()
 
     @Query("SELECT * FROM makeupItems_entity WHERE :brand == brand")
-    fun getAllMakeupItems(brand:String): List<MakeupItemEntity>
+    suspend fun getAllMakeupItems(brand:String): List<MakeupItemEntity>
 
     @Query("SELECT * FROM makeupItems_entity")
-    fun getMakeupItems(): List<MakeupItemEntity>
+    suspend fun getMakeupItems(): List<MakeupItemEntity>
 
 }

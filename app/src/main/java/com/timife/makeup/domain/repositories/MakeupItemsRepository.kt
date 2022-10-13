@@ -2,15 +2,13 @@ package com.timife.makeup.domain.repositories
 
 import com.timife.makeup.data.local.model.MakeupItemEntity
 import com.timife.makeup.data.remote.model.MakeupListItemDto
+import com.timife.makeup.domain.model.Brand
+import com.timife.makeup.domain.model.MakeupItem
+import com.timife.makeup.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 interface MakeupItemsRepository {
-    suspend fun getLocalMakeupItems(brand: String):List<MakeupItemEntity>
+    suspend fun getMakeupItems(fetchFromRemote: Boolean,brand:String): Flow<Resource<List<MakeupItem>>>
 
-    suspend fun getUnfilteredItems():List<MakeupItemEntity>
-
-    suspend fun getRemoteMakeupItems():List<MakeupListItemDto>
-
-    suspend fun insertItem(list:List<MakeupItemEntity>)
-
-    suspend fun clearItemList()
+    suspend fun getAllMakeupItems(): Flow<Resource<List<MakeupItem>>>
 }

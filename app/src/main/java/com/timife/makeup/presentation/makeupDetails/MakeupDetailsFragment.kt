@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -15,23 +14,27 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MakeupDetailsFragment : Fragment() {
     private lateinit var detailsBinding: FragmentMakeupDetailsBinding
+    private val viewModel by viewModels<MakeupDetailViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         detailsBinding = FragmentMakeupDetailsBinding.inflate(inflater, container, false)
-        val makeupItem = MakeupDetailsFragmentArgs.fromBundle(arguments!!).selectedMakeup
 
-        detailsBinding.productDetails.text = makeupItem.description
-        detailsBinding.productName.text = makeupItem.name
-        detailsBinding.price.text = "$${makeupItem.price}"
+        viewModel.itemData.observe(viewLifecycleOwner){
 
-        Glide.with(requireContext()).load(makeupItem.imageLink)
-            .error(R.drawable.ic_image_error)
-            .into(detailsBinding.detailImage)
+            detailsBinding.apply {
+                productName.text = it.name
+                productDetails.text = it.description
+                rating.rating = it.rating.toFloat()
+                price.text = "$${it.price}"
 
-        detailsBinding.rating.rating = makeupItem.rating.toFloat()
+                Glide.with(requireContext()).load(it.imageLink)
+                    .error(R.drawable.ic_image_error)
+                    .into(detailsBinding.detailImage)
+            }
+        }
 
         return detailsBinding.root
     }

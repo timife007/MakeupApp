@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.timife.makeup.data.local.model.MakeupBrandEntity
 
 @Dao
-interface MakeupDao {
+interface BrandDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMakeupBrands(
@@ -18,5 +18,5 @@ interface MakeupDao {
     suspend fun clearAllBrands()
 
     @Query("SELECT * FROM makeupBrands_entity")
-    fun getAllBrands(): List<MakeupBrandEntity>
+    suspend fun getAllBrands(): List<MakeupBrandEntity>
 }

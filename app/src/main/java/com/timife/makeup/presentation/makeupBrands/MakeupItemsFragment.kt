@@ -97,15 +97,10 @@ class MakeupItemsFragment : Fragment() {
                                 }
                             }
                         }
-
                     }
-                    is Resource.Loading -> {
-                        //Could change to stateflow to avoid multiple livedatas
-                        it.isLoading
-                    }
+                    is Resource.Loading ->Unit
                     is Resource.Error -> {
                         hideProgressBar()
-                        showErrorMessage()
                         brandsBinding.errorMessage.text = it.message
                     }
                 }
@@ -122,25 +117,19 @@ class MakeupItemsFragment : Fragment() {
                 }
             }
 
-            itemLoading.observe(viewLifecycleOwner) {
-                when (it) {
-                    true -> {
-                        brandsBinding.listProgress.visibility = View.VISIBLE
-                    }
-                    false -> {
-                        brandsBinding.listProgress.visibility = View.INVISIBLE
-                    }
-                }
-            }
-
             itemsData.observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Success ->{
                         makeupItemsAdapter.submitList(it.data)
                         makeupItemsAdapter.notifyDataSetChanged()
+                        hideProgressBar()
                     }
                     is Resource.Loading -> {
-                        it.isLoading
+                        if(it.isLoading){
+                            showProgressBar()
+                        }else{
+                            hideProgressBar()
+                        }
                     }
                     is Resource.Error -> {
                         hideProgressBar()

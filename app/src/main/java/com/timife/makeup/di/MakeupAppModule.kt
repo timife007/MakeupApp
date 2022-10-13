@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import com.timife.makeup.data.local.database.MakeupDao
+import com.timife.makeup.data.local.database.BrandDao
 import com.timife.makeup.data.local.database.MakeupDatabase
 import com.timife.makeup.data.local.database.MakeupItemDao
 import com.timife.makeup.data.remote.MakeupApi
@@ -61,7 +61,7 @@ object MakeupAppModule {
     @Singleton
     fun provideMakeupDao(
         makeupDatabase: MakeupDatabase
-    ): MakeupDao {
+    ): BrandDao {
         return makeupDatabase.dao
     }
 
