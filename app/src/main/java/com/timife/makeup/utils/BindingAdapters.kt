@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 
 import com.timife.makeup.R
 
+//To bind imageUri to view
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
