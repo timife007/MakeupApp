@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.timife.makeup.domain.model.MakeupItem
+import com.timife.domain.model.MakeupItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,6 +19,17 @@ class MakeupDetailViewModel @Inject constructor(
 
     init {
         val makeup = savedStateHandle.get<MakeupItem>("selectedMakeup")
-        _itemData.value = makeup ?: MakeupItem(1,"","","","","",0.0,"","","")
+        _itemData.value = makeup ?: MakeupItem(
+            1,
+            "",
+            "",
+            "",
+            "",
+            "",
+            0.0,
+            "",
+            "",
+            ""
+        )
     }
 }

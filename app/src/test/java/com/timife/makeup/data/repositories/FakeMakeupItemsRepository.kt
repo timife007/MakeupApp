@@ -1,18 +1,14 @@
 package com.timife.makeup.data.repositories
 
 import androidx.lifecycle.MutableLiveData
-import com.timife.makeup.data.local.model.MakeupItemEntity
-import com.timife.makeup.data.remote.model.MakeupListItemDto
-import com.timife.makeup.domain.repositories.MakeupItemsRepository
-import org.junit.jupiter.api.Assertions.*
-
-import org.junit.jupiter.api.Test
-import javax.inject.Inject
+import com.timife.cache.model.MakeupItemEntity
+import com.timife.remote.model.MakeupListItemDto
+import com.timife.domain.repositories.MakeupItemsRepository
 
 
-class FakeMakeupItemsRepository:MakeupItemsRepository {
-    private val makeupItems = mutableListOf<MakeupItemEntity>()
-    private val observableShoppingItems = MutableLiveData<List<MakeupItemEntity>>(makeupItems)
+class FakeMakeupItemsRepository: com.timife.domain.repositories.MakeupItemsRepository {
+    private val makeupItems = mutableListOf<com.timife.cache.model.MakeupItemEntity>()
+    private val observableShoppingItems = MutableLiveData<List<com.timife.cache.model.MakeupItemEntity>>(makeupItems)
 
 
 
@@ -21,21 +17,21 @@ class FakeMakeupItemsRepository:MakeupItemsRepository {
         observableShoppingItems.postValue(makeupItems)
     }
 
-    override suspend fun getLocalMakeupItems(brand: String): List<MakeupItemEntity> {
+    override suspend fun getLocalMakeupItems(brand: String): List<com.timife.cache.model.MakeupItemEntity> {
         return makeupItems.filter {
             it.brand == brand
         }
     }
 
-    override suspend fun getUnfilteredItems(): List<MakeupItemEntity> {
+    override suspend fun getUnfilteredItems(): List<com.timife.cache.model.MakeupItemEntity> {
         return makeupItems
     }
 
-    override suspend fun getRemoteMakeupItems(): List<MakeupListItemDto> {
+    override suspend fun getRemoteMakeupItems(): List<com.timife.remote.model.MakeupListItemDto> {
         return emptyList()
     }
 
-    override suspend fun insertItem(list: List<MakeupItemEntity>) {
+    override suspend fun insertItem(list: List<com.timife.cache.model.MakeupItemEntity>) {
         list.forEach{
             makeupItems.add(it)
         }

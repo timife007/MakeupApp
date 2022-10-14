@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_makeup_details">
         <argument
             android:name="selectedMakeup"
-            app:argType="com.timife.makeup.domain.model.MakeupItem"/>
+            app:argType="com.timife.domain.model.MakeupItem"/>
 
     </fragment>
 </navigation>
