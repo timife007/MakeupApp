@@ -4,12 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.timife.makeup.domain.model.Brand
-import com.timife.makeup.domain.model.MakeupItem
-import com.timife.makeup.domain.use_cases.GetBrands
-import com.timife.makeup.domain.use_cases.GetDefaultItems
-import com.timife.makeup.domain.use_cases.GetMakeupItems
-import com.timife.makeup.utils.Resource
+import com.timife.domain.model.Brand
+import com.timife.domain.model.MakeupItem
+import com.timife.domain.use_cases.GetBrands
+import com.timife.domain.use_cases.GetDefaultItems
+import com.timife.domain.use_cases.GetMakeupItems
+import com.timife.domain.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,7 +60,7 @@ class MakeupItemsViewModel @Inject constructor(
                 }
         }
     }
-    fun getAllMakeupItems(fetchFromRemote: Boolean = false){
+    fun getAllMakeupItems(){
         viewModelScope.launch {
             getDefaultItems().collect { resource->
                 when(resource){
@@ -99,7 +99,7 @@ class MakeupItemsViewModel @Inject constructor(
         }
     }
 
-    fun displayMakeupItems(product:MakeupItem){
+    fun displayMakeupItems(product: MakeupItem){
         _navigateToSelectedItem.value = product
     }
 

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="brandItem"
-            type="com.timife.makeup.domain.model.MakeupItem" />
+            type="com.timife.domain.model.MakeupItem" />
 
     </data>
 

@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.timife.makeup.R
 import com.timife.makeup.databinding.FragmentMakeupItemsBinding
-import com.timife.makeup.domain.model.Brand
-import com.timife.makeup.utils.Resource
+import com.timife.domain.model.Brand
+import com.timife.domain.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -64,7 +65,7 @@ class MakeupItemsFragment : Fragment() {
             brandData.observe(viewLifecycleOwner) {
                 when (it) {
                     is Resource.Success -> {
-                        if (it.data is List<Brand> && it.data.isNotEmpty()) {
+                        if (it.data is List<Brand> && it.data?.isNotEmpty() == true) {
                             val chipGroup = brandsBinding.brandChipGroup
                             chipGroup.removeAllViews()
                             val chip = Chip(requireActivity(), null, R.style.CustomChipChoice)
@@ -77,7 +78,7 @@ class MakeupItemsFragment : Fragment() {
                             chip.isChecked = true
                             chipGroup.addView(chip)
 
-                            it.data.forEach { brandItem ->
+                            it.data?.forEach { brandItem ->
                                 val chipItems = Chip(requireActivity(), null, R.style.CustomChipChoice)
                                 chipItems.text = brandItem.brand
                                 chipItems.isCheckable = true
@@ -87,13 +88,16 @@ class MakeupItemsFragment : Fragment() {
                                 chipItems.isCloseIconVisible = false
                                 chipGroup.addView(chipItems)
                             }
-                            chipGroup.setOnCheckedChangeListener { group, checkedId ->
-                                val clickedChip = group.findViewById<Chip>(checkedId)
-                                if (clickedChip?.text != "ALL") {
-                                    makeupItemsViewModel.getMakeupItems(brand = clickedChip?.text.toString())
-                                } else {
-                                    makeupItemsViewModel.getAllMakeupItems()
+                            chipGroup.setOnCheckedStateChangeListener{  group, checkedIds ->
+                                for(i in checkedIds){
+                                    val clickedChip = group.findViewById<Chip>(i)
+                                    if (clickedChip?.text != "ALL") {
+                                        makeupItemsViewModel.getMakeupItems(brand = clickedChip?.text.toString())
+                                    } else {
+                                        makeupItemsViewModel.getAllMakeupItems()
+                                    }
                                 }
+
                             }
                         }
                     }

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.timife.makeup.databinding.MakeupListItemBinding
-import com.timife.makeup.domain.model.MakeupItem
+import com.timife.domain.model.MakeupItem
 
 class MakeupItemsAdapter(private val clickListener: BrandClickListener) :
     ListAdapter<MakeupItem, MakeupItemsAdapter.MakeupViewHolder>(MakeupDiffUtil()) {
@@ -52,7 +52,7 @@ class MakeupItemsAdapter(private val clickListener: BrandClickListener) :
         }
     }
 
-    class BrandClickListener(val clickListener:(item:MakeupItem) -> Unit){
+    class BrandClickListener(val clickListener:(item: MakeupItem) -> Unit){
         fun onClick(item: MakeupItem){
             clickListener(item)
         }
