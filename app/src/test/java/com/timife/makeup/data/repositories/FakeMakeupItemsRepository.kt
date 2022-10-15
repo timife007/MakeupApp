@@ -2,45 +2,23 @@ package com.timife.makeup.data.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.timife.cache.model.MakeupItemEntity
+import com.timife.domain.Resource
+import com.timife.domain.model.MakeupItem
 import com.timife.remote.model.MakeupListItemDto
 import com.timife.domain.repositories.MakeupItemsRepository
+import kotlinx.coroutines.flow.Flow
 
 
-class FakeMakeupItemsRepository: com.timife.domain.repositories.MakeupItemsRepository {
-    private val makeupItems = mutableListOf<com.timife.cache.model.MakeupItemEntity>()
-    private val observableShoppingItems = MutableLiveData<List<com.timife.cache.model.MakeupItemEntity>>(makeupItems)
-
-
-
-    //Update livedata at every change in fake database
-    private fun refreshLiveData() {
-        observableShoppingItems.postValue(makeupItems)
+class FakeMakeupItemsRepository(): MakeupItemsRepository {
+    override suspend fun getMakeupItems(
+        fetchFromRemote: Boolean,
+        brand: String
+    ): Flow<Resource<List<MakeupItem>>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun getLocalMakeupItems(brand: String): List<com.timife.cache.model.MakeupItemEntity> {
-        return makeupItems.filter {
-            it.brand == brand
-        }
-    }
-
-    override suspend fun getUnfilteredItems(): List<com.timife.cache.model.MakeupItemEntity> {
-        return makeupItems
-    }
-
-    override suspend fun getRemoteMakeupItems(): List<com.timife.remote.model.MakeupListItemDto> {
-        return emptyList()
-    }
-
-    override suspend fun insertItem(list: List<com.timife.cache.model.MakeupItemEntity>) {
-        list.forEach{
-            makeupItems.add(it)
-        }
-        refreshLiveData()
-    }
-
-    override suspend fun clearItemList() {
-        makeupItems.clear()
-        refreshLiveData()
+    override suspend fun getAllMakeupItems(): Flow<Resource<List<MakeupItem>>> {
+        TODO("Not yet implemented")
     }
 
 

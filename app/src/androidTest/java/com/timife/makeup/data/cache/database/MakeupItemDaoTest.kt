@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 
-@OptIn(ExperimentalCoroutinesApi::class)
+@ExperimentalCoroutinesApi
 class MakeupItemDaoTest {
 
     //Helps avoid concurrency, run each process one after the other.
@@ -42,7 +42,7 @@ class MakeupItemDaoTest {
     @org.junit.jupiter.api.Test
     fun insertMakeupItem() = runTest {
         //Given
-        val makeupItem = com.timife.cache.model.MakeupItemEntity(
+        val makeupItem = MakeupItemEntity(
             id = 1,
             name = "Lip Gloss",
             imageUrl = "https:github.com",
@@ -67,7 +67,7 @@ class MakeupItemDaoTest {
     @Test
     fun clearMakeupItems() = runTest {
         //Given
-        val makeupItem = com.timife.cache.model.MakeupItemEntity(
+        val makeupItem = MakeupItemEntity(
             id = 1,
             name = "Lip Gloss",
             imageUrl = "https:github.com",
@@ -93,7 +93,7 @@ class MakeupItemDaoTest {
     @Test
     fun getAllMakeupItems() = runTest {
         //Given
-        val makeupItem1 = com.timife.cache.model.MakeupItemEntity(
+        val makeupItem1 = MakeupItemEntity(
             id = 1,
             name = "Lip Gloss",
             imageUrl = "https:github.com",
@@ -105,7 +105,7 @@ class MakeupItemDaoTest {
             currency = "CAD",
             rating = 2.0
         )
-        val makeupItem2 = com.timife.cache.model.MakeupItemEntity(
+        val makeupItem2 = MakeupItemEntity(
             id = 2,
             name = "Lip Stick",
             imageUrl = "https:github.com/timife007",
