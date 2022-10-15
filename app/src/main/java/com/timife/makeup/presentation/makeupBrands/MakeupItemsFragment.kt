@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.size
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
@@ -87,13 +88,16 @@ class MakeupItemsFragment : Fragment() {
                                 chipItems.isCloseIconVisible = false
                                 chipGroup.addView(chipItems)
                             }
-                            chipGroup.setOnCheckedChangeListener { group, checkedId ->
-                                val clickedChip = group.findViewById<Chip>(checkedId)
-                                if (clickedChip?.text != "ALL") {
-                                    makeupItemsViewModel.getMakeupItems(brand = clickedChip?.text.toString())
-                                } else {
-                                    makeupItemsViewModel.getAllMakeupItems()
+                            chipGroup.setOnCheckedStateChangeListener{  group, checkedIds ->
+                                for(i in checkedIds){
+                                    val clickedChip = group.findViewById<Chip>(i)
+                                    if (clickedChip?.text != "ALL") {
+                                        makeupItemsViewModel.getMakeupItems(brand = clickedChip?.text.toString())
+                                    } else {
+                                        makeupItemsViewModel.getAllMakeupItems()
+                                    }
                                 }
+
                             }
                         }
                     }

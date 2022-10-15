@@ -60,7 +60,7 @@ class MakeupItemsViewModel @Inject constructor(
                 }
         }
     }
-    fun getAllMakeupItems(fetchFromRemote: Boolean = false){
+    fun getAllMakeupItems(){
         viewModelScope.launch {
             getDefaultItems().collect { resource->
                 when(resource){
@@ -99,7 +99,7 @@ class MakeupItemsViewModel @Inject constructor(
         }
     }
 
-    fun displayMakeupItems(product: com.timife.domain.model.MakeupItem){
+    fun displayMakeupItems(product: MakeupItem){
         _navigateToSelectedItem.value = product
     }
 
