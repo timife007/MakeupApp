@@ -1,8 +1,10 @@
+
 package com.timife.makeup.domain.use_cases
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.timife.domain.use_cases.GetMakeupItems
 import com.timife.makeup.data.repositories.FakeMakeupItemsRepository
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.jupiter.api.AfterEach
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach
 
 import org.junit.jupiter.api.Test
 
+@ExperimentalCoroutinesApi
 internal class MakeupListUseCaseTest {
     private lateinit var makeupListUseCase: GetMakeupItems
 
