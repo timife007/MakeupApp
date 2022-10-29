@@ -28,7 +28,7 @@ class MakeupDetailsFragment : Fragment() {
                 productName.text = it.name
                 productDetails.text = it.description
                 rating.rating = it.rating.toFloat()
-                price.text = "$${it.price}"
+                price.text = getString(R.string.price,"$",it.price)
 
                 Glide.with(requireContext()).load(it.imageLink)
                     .error(R.drawable.ic_image_error)
