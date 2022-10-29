@@ -3,4 +3,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="description">Description</string>
     <string name="makeup">makeup</string>
+    <string name="price">%1$s%2$s</string>
 </resources>
