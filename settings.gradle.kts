@@ -13,10 +13,10 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MakeUp"
-include ':app'
-include ':core'
-include ':core:data'
-include ':core:cache'
-include ':core:remote'
-include ':domain'
-include ':benchmark'
+include (":app")
+include (":core")
+include (":core:data")
+include (":core:cache")
+include (":core:remote")
+include (":domain")
+include (":benchmark")
