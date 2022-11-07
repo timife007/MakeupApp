@@ -10,7 +10,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -33,10 +32,7 @@ object RemoteModule {
                             .redactHeaders(emptySet())
                             .alwaysReadResponseBody(false)
                             .build()
-                    )
-                    .addInterceptor(HttpLoggingInterceptor().apply {
-                        level = HttpLoggingInterceptor.Level.BASIC
-                    }).build()
+                    ).build()
             )
             .build()
             .create(com.timife.remote.MakeupApi::class.java)

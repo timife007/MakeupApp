@@ -1,14 +1,14 @@
 plugins {
-    id 'com.android.test'
-    id 'org.jetbrains.kotlin.android'
+    id("com.android.test")
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
-    compileSdk 32
+    compileSdk = 33
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
@@ -16,10 +16,10 @@ android {
     }
 
     defaultConfig {
-        minSdk 23
-        targetSdk 32
+        minSdk = 23
+        targetSdk = 33
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // If your app uses build flavors, you can define which flavor to use when
         // building the benchmarks by defining a missingDimensionStrategy.
@@ -38,10 +38,10 @@ android {
         // This benchmark buildType is used for benchmarking, and should function like your
         // release build (for example, with minification on). It's signed with a debug key
         // for easy local/CI testing.
-        benchmark {
-            debuggable = true
-            signingConfig = debug.signingConfig
-            matchingFallbacks = ["release"]
+        val benchmark by creating {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+            matchingFallbacks.add("release")
         }
     }
 
@@ -50,14 +50,14 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.test.ext:junit:1.1.3'
-    implementation 'androidx.test.espresso:espresso-core:3.4.0'
-    implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
-    implementation 'androidx.benchmark:benchmark-macro-junit4:1.1.0-beta04'
+    implementation("androidx.test.ext:junit:1.1.3")
+    implementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    implementation("androidx.benchmark:benchmark-macro-junit4:1.2.0-alpha06")
 }
 
 androidComponents {
-    beforeVariants(selector().all()) {
-        enabled = buildType == "benchmark"
+    beforeVariants {
+        it.enable = it.buildType == "benchmark"
     }
 }
