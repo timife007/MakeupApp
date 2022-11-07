@@ -22,8 +22,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp()= NavigationUI.navigateUp(navController,null)
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 }

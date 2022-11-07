@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
     defaultConfig {
         applicationId = "com.timife.makeup"
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -104,12 +104,11 @@ dependencies {
 
     //ViewModel
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
 
     //Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
 
 
@@ -126,7 +125,7 @@ dependencies {
     implementation ("com.jakewharton.timber:timber:5.0.1")
 
     //Tests
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.9.0")
     testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation ("org.junit.jupiter:junit-jupiter-params:5.9.0")
@@ -142,6 +141,6 @@ dependencies {
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
     androidTestImplementation ("com.google.truth:truth:1.0.1")
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
 }

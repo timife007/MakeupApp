@@ -2,7 +2,7 @@
 buildscript{
     dependencies{
         classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.1")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
     }
 }
 plugins {
@@ -12,10 +12,6 @@ plugins {
     id ("com.google.dagger.hilt.android") version "2.41" apply false
     id ("com.android.test") version "7.2.1" apply false
 }
-
-//task clean(type: Delete) {
-//    delete = rootProject.buildDir
-//}
 
 tasks.register(name = "type", type = Delete::class) {
     delete(rootProject.buildDir)
