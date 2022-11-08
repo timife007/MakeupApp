@@ -17,7 +17,7 @@ android {
     }
 
     buildTypes {
-        release {
+        val release by getting {
             isMinifyEnabled = false
             proguardFiles (
                     getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,23 +38,22 @@ dependencies {
     implementation(project(":core:cache"))
     implementation(project(":core:remote"))
 
-
-    implementation ("androidx.core:core-ktx:1.7.0")
-    implementation ("androidx.appcompat:appcompat:1.5.1")
-    implementation ("com.google.android.material:material:1.6.1")
-    testImplementation ("junit:junit:4.13.2")
+//
+    implementation (Deps.coreKtx)
+    implementation (Deps.appCompat)
+    testImplementation (Deps.junitTest)
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     //di
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
-    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation(Deps.hilt)
+    kapt(Deps.hiltAndroidCompiler)
+    kapt (Deps.hiltCompiler)
 
-    implementation( "com.squareup.retrofit2:retrofit:2.9.0")
+    implementation( Deps.retrofit)
 
 
 
     //Logging
-    implementation ("com.jakewharton.timber:timber:5.0.1")
+    implementation (Deps.timber)
 }

@@ -17,7 +17,7 @@ android {
     }
 
     buildTypes {
-        release {
+        val release by getting {
             isMinifyEnabled = false
             proguardFiles (
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -35,31 +35,28 @@ android {
 
 dependencies {
 
-    implementation ("androidx.core:core-ktx:1.7.0")
-    implementation ("androidx.appcompat:appcompat:1.5.1")
-    implementation ("com.google.android.material:material:1.6.1")
-    testImplementation ("junit:junit:4.13.2")
+    implementation (Deps.coreKtx)
+    implementation (Deps.appCompat)
+    testImplementation (Deps.junitTest)
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     //di
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
-    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation(Deps.hilt)
+    kapt(Deps.hiltAndroidCompiler)
+    kapt (Deps.hiltCompiler)
 
     //retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
-    implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation (Deps.retrofit)
+    implementation (Deps.moshi)
+    implementation (Deps.coroutinesAdapter)
 
-    //Http Interceptor
-//    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha03")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0-alpha03")
+    implementation (Deps.lifecycle)
 
     //leak canary to detect memory leaks
-    debugImplementation ("com.squareup.leakcanary:leakcanary-android:2.8.1")
+    debugImplementation (Deps.canary)
 
     // Chucker for analysing network traffic
-    debugImplementation ("com.github.chuckerteam.chucker:library:3.5.2")
-    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:3.5.2")
+    debugImplementation (Deps.chuckerLib)
+    releaseImplementation (Deps.chuckerNoOp)
 }
