@@ -36,22 +36,21 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation ("com.google.android.material:material:1.6.1")
-    testImplementation("junit:junit:4.13.2")
+    implementation(Deps.coreKtx)
+    implementation(Deps.appCompat)
+    testImplementation(Deps.junitTest)
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     //di
-    implementation("com.google.dagger:hilt-android:2.40.5")
-    kapt("com.google.dagger:hilt-android-compiler:2.40.5")
-    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation(Deps.hilt)
+    kapt(Deps.hiltAndroidCompiler)
+    kapt (Deps.hiltCompiler)
 
     //Room
-    implementation ("androidx.room:room-runtime:2.4.3")
-    implementation ("androidx.room:room-ktx:2.4.3")
-    kapt ("androidx.room:room-compiler:2.4.3")
+    implementation (Deps.room)
+    implementation (Deps.roomKtx)
+    kapt (Deps.roomCompiler)
 
 
 }
