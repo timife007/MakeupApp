@@ -38,8 +38,9 @@ dependencies {
 
     implementation (Deps.coreKtx)
     implementation (Deps.appCompat)
-    testImplementation ("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
+    implementation (Deps.materialDesign)
+    testImplementation (Deps.junitTest)
+    androidTestImplementation(Deps.junitExt)
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
 
     //di

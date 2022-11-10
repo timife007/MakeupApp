@@ -17,7 +17,7 @@ android {
     }
 
     buildTypes {
-        val release by getting {
+        release {
             isMinifyEnabled = false
             proguardFiles (
                     getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -38,9 +38,10 @@ dependencies {
     implementation(project(":core:cache"))
     implementation(project(":core:remote"))
 
-//
+
     implementation (Deps.coreKtx)
     implementation (Deps.appCompat)
+    implementation (Deps.materialDesign)
     testImplementation (Deps.junitTest)
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")

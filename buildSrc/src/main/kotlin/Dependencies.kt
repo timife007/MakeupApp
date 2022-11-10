@@ -41,6 +41,7 @@ object Deps{
     val jupiterParams by lazy {"org.junit.jupiter:junit-jupiter-params:${Versions.jupiter}"}
     val coroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"}
     val junitTest by lazy {"junit:junit:${Versions.junit}"}
+    val junitExt by lazy {"androidx.test.ext:junit:${Versions.junitExt}"}
     val coreTest by lazy {"androidx.arch.core:core-testing:${Versions.core}"}
     val vintage by lazy { "org.junit.vintage:junit-vintage-engine:${Versions.jupiter}" }
 

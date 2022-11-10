@@ -26,7 +26,7 @@ object Versions {
     const val junitExt = "1.1.3"
     const val espresso = "3.4.0"
     const val retrofit = "2.9.0"
-    const val canary = "2.8.0"
+    const val canary = "2.8.1"
     const val retrofitAdapter = "0.9.2"
     const val chucker = "3.5.2"
 
