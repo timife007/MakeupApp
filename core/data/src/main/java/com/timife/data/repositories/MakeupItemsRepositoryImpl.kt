@@ -5,6 +5,7 @@ import com.timife.data.mappers.toMakeupItem
 import com.timife.data.mappers.toMakeupItemEntity
 import com.timife.domain.Resource
 import com.timife.domain.model.MakeupItem
+import com.timife.domain.repositories.MakeupItemsRepository
 import com.timife.remote.Remote
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -16,7 +17,7 @@ import javax.inject.Inject
 class MakeupItemsRepositoryImpl @Inject constructor(
     private val cache: Cache,
     private val remote: Remote
-) : com.timife.domain.repositories.MakeupItemsRepository {
+) : MakeupItemsRepository {
     override suspend fun getMakeupItems(
         fetchFromRemote: Boolean,
         brand: String
@@ -24,11 +25,11 @@ class MakeupItemsRepositoryImpl @Inject constructor(
         return flow {
             emit(Resource.Loading(true))
             val localItems = cache.getLocalMakeupItems(brand)
-            if (localItems.isNotEmpty()) {
-                emit(Resource.Success(data = localItems.map {
+//            if (localItems.isNotEmpty()) {
+            emit(Resource.Success(data = localItems.map {
                     it.toMakeupItem()
                 }))
-            }
+//            }
 
             //Should only load data from db if Db is not empty and remote fetch is false.
             val isDbEmpty = localItems.isEmpty() && brand.isBlank()

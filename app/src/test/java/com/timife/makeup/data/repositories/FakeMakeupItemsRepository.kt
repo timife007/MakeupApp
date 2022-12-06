@@ -9,7 +9,7 @@ import com.timife.domain.repositories.MakeupItemsRepository
 import kotlinx.coroutines.flow.Flow
 
 
-class FakeMakeupItemsRepository(): MakeupItemsRepository {
+class FakeMakeupItemsRepository : MakeupItemsRepository {
     override suspend fun getMakeupItems(
         fetchFromRemote: Boolean,
         brand: String

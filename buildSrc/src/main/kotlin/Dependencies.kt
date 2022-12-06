@@ -1,8 +1,6 @@
 import java.lang.Runtime.Version
 
-object BuildGradle{
-
-}
+object BuildGradle
 
 object Deps{
     val appCompat by lazy{"androidx.core:core-ktx:${Versions.appCompat}"}
@@ -44,6 +42,9 @@ object Deps{
     val junitExt by lazy {"androidx.test.ext:junit:${Versions.junitExt}"}
     val coreTest by lazy {"androidx.arch.core:core-testing:${Versions.core}"}
     val vintage by lazy { "org.junit.vintage:junit-vintage-engine:${Versions.jupiter}" }
+    val turbine by lazy {"app.cash.turbine:turbine:${Versions.turbine}"}
+    val mockk by lazy {"io.mockk:mockk:${Versions.mockk}"}
+    val truth by lazy {"com.google.truth:truth:${Versions.truth}"}
 
 
 }

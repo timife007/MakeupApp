@@ -11,6 +11,9 @@ import com.timife.domain.use_cases.GetDefaultItems
 import com.timife.domain.use_cases.GetMakeupItems
 import com.timife.domain.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,9 +32,16 @@ class MakeupItemsViewModel @Inject constructor(
     val brandData : LiveData<Resource<List<Brand>>>
     get() = _brandData
 
-    private val _itemsData = MutableLiveData<Resource<List<MakeupItem>>>()
-    val itemsData : LiveData<Resource<List<MakeupItem>>>
-    get() = _itemsData
+//    private val _brandData = MutableStateFlow<Resource<List<Brand>>>(Resource.Loading(true))
+//    val brandData : StateFlow<Resource<List<Brand>>> = _brandData
+//    get() = _brandData
+
+//    private val _itemsData = MutableLiveData<Resource<List<MakeupItem>>>()
+//    val itemsData : LiveData<Resource<List<MakeupItem>>>
+//    get() = _itemsData
+
+    private val _itemsData = MutableStateFlow<MakeupUiState>(MakeupUiState.Loading)
+    val itemsData : StateFlow<MakeupUiState> = _itemsData
 
     private val _navigateToSelectedItem = MutableLiveData<MakeupItem?>()
     val navigateToSelectedItem: LiveData<MakeupItem?>
@@ -47,32 +57,33 @@ class MakeupItemsViewModel @Inject constructor(
                  getItems(fetchFromRemote,brand).collect{ resource->
                     when(resource){
                         is Resource.Success ->{
-                            _itemsData.value = resource
+                            _itemsData.value = MakeupUiState.Success( resource.data ?: emptyList())
                         }
                         is Resource.Loading ->{
-                            _loading.value = resource.isLoading
+                            _itemsData.value = MakeupUiState.Loading
                         }
 
                         is Resource.Error -> {
-                            _itemsData.value = Resource.Error(message = resource.message,data = resource.data)
+                            _itemsData.value = MakeupUiState.Error(resource.message ?: "Error fetching items. Please check network connection!")
                         }
                     }
                 }
         }
     }
+
     fun getAllMakeupItems(){
         viewModelScope.launch {
             getDefaultItems().collect { resource->
                 when(resource){
                     is Resource.Success ->{
-                        _itemsData.value = resource
+                        _itemsData.value = MakeupUiState.Success(makeupItems = resource.data ?: emptyList())
                     }
                     is Resource.Loading ->{
-                        _loading.value = resource.isLoading
+                        _itemsData.value = MakeupUiState.Loading
                     }
 
-                    is Resource.Error ->{
-                        _itemsData.value = Resource.Error(message = resource.message, data = resource.data)
+                    is Resource.Error -> {
+                        _itemsData.value = MakeupUiState.Error(resource.message ?: "Error fetching items. Please check network connection!")
                     }
                 }
             }

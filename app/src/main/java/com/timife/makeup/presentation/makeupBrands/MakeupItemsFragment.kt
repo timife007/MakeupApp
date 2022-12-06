@@ -1,5 +1,6 @@
 package com.timife.makeup.presentation.makeupBrands
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.size
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.timife.makeup.R
@@ -14,6 +18,8 @@ import com.timife.makeup.databinding.FragmentMakeupItemsBinding
 import com.timife.domain.model.Brand
 import com.timife.domain.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MakeupItemsFragment : Fragment() {
@@ -35,9 +41,31 @@ class MakeupItemsFragment : Fragment() {
         return brandsBinding.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeViewModels()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                makeupItemsViewModel.itemsData.collectLatest{
+                    when(it){
+                        is MakeupUiState.Success ->{
+                            makeupItemsAdapter.submitList(it.makeupItems)
+                            makeupItemsAdapter.notifyDataSetChanged()
+                        }
+                        is MakeupUiState.Loading ->{
+                            showProgressBar()
+                        }
+                        is MakeupUiState.Error ->{
+                            showErrorMessage()
+                            hideProgressBar()
+                            brandsBinding.errorMessage.text = it.errorMessage
+                        }
+
+                    }
+                }
+            }
+        }
         makeupItemsViewModel.navigateToSelectedItem.observe(viewLifecycleOwner) {
             if (it != null) {
                 this.findNavController().navigate(
@@ -49,7 +77,7 @@ class MakeupItemsFragment : Fragment() {
     }
 
     private fun hideProgressBar() {
-        brandsBinding.brandProgress.visibility = View.INVISIBLE
+        brandsBinding.brandProgress.visibility = View.GONE
     }
 
     private fun showErrorMessage() {
@@ -119,28 +147,32 @@ class MakeupItemsFragment : Fragment() {
                     }
                 }
             }
+//            lifecycleScope.launch {
+//                when
+//            }
 
-            itemsData.observe(viewLifecycleOwner){
-                when(it){
-                    is Resource.Success ->{
-                        makeupItemsAdapter.submitList(it.data)
-                        makeupItemsAdapter.notifyDataSetChanged()
-                        hideProgressBar()
-                    }
-                    is Resource.Loading -> {
-                        if(it.isLoading){
-                            showProgressBar()
-                        }else{
-                            hideProgressBar()
-                        }
-                    }
-                    is Resource.Error -> {
-                        hideProgressBar()
-                        showErrorMessage()
-                        brandsBinding.errorMessage.text = it.message
-                    }
-                }
-            }
+//            itemsData.observe(viewLifecycleOwner){
+//                when(it){
+//                    is Resource.Success ->{
+//                        makeupItemsAdapter.submitList(it.data)
+//                        makeupItemsAdapter.notifyDataSetChanged()
+//                        hideProgressBar()
+//                    }
+//                    is Resource.Loading -> {
+//                        if(it.isLoading){
+//                            showProgressBar()
+//                        }else{
+//                            hideProgressBar()
+//                        }
+//                    }
+//                    is Resource.Error -> {
+//                        hideProgressBar()
+//                        showErrorMessage()
+//                        brandsBinding.errorMessage.text = it.message
+//                    }
+//                }
+//            }
+
         }
     }
 }

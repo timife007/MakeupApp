@@ -1,10 +1,13 @@
 package com.timife.data.repositories
 
+import android.content.ContentProvider
+import androidx.loader.content.CursorLoader
 import com.timife.cache.Cache
 import com.timife.data.mappers.toBrand
 import com.timife.data.mappers.toMakeupBrand
 import com.timife.data.mappers.toMakeupBrandEntity
 import com.timife.domain.Resource
+import com.timife.domain.model.Brand
 import com.timife.domain.repositories.BrandRepository
 import com.timife.remote.Remote
 import kotlinx.coroutines.flow.Flow
@@ -17,17 +20,14 @@ import javax.inject.Inject
 class BrandRepositoryImpl @Inject constructor(
     private val remote: Remote,
     private val cache: Cache
-) : BrandRepository {
-    override suspend fun getBrands(fetchFromRemote: Boolean): Flow<Resource<List<com.timife.domain.model.Brand>>> {
+) : BrandRepository{
+    override suspend fun getBrands(fetchFromRemote: Boolean): Flow<Resource<List<Brand>>> {
         return flow {
             emit(Resource.Loading(true))
             val localBrand = cache.getLocalMakeupBrands()
-            if (localBrand.isNotEmpty()) {
-                emit(Resource.Success(data = localBrand.map {
+            emit(Resource.Success(data = localBrand.map {
                     it.toMakeupBrand()
                 }))
-            }
-
 
             //Should only load data from db if Db is not empty and remote fetch is false.
             val isDbEmpty = localBrand.isEmpty()
