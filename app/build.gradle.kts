@@ -132,6 +132,9 @@ dependencies {
     testImplementation (Deps.junitTest)
     testImplementation (Deps.coreTest)
     testRuntimeOnly (Deps.vintage)
+    testImplementation (Deps.truth)
+    testImplementation (Deps.turbine)
+    testImplementation (Deps.mockk)
 
     //Instrumentation Tests
     androidTestImplementation("androidx.test:runner:1.4.0")

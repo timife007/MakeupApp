@@ -44,6 +44,9 @@ object Deps{
     val junitExt by lazy {"androidx.test.ext:junit:${Versions.junitExt}"}
     val coreTest by lazy {"androidx.arch.core:core-testing:${Versions.core}"}
     val vintage by lazy { "org.junit.vintage:junit-vintage-engine:${Versions.jupiter}" }
+    val turbine by lazy {"app.cash.turbine:turbine:${Versions.turbine}"}
+    val mockk by lazy {"io.mockk:mockk:${Versions.mockk}"}
+    val truth by lazy {"com.google.truth:truth:${Versions.truth}"}
 
 
 }

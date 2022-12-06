@@ -29,5 +29,7 @@ object Versions {
     const val canary = "2.8.1"
     const val retrofitAdapter = "0.9.2"
     const val chucker = "3.5.2"
+    const val turbine = "0.12.1"
+    const val mockk = "1.12.4"
 
 }
