@@ -12,7 +12,7 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class GetBrandsTest {
-    private lateinit var repository : BrandRepository
+    private lateinit var repository: BrandRepository
     private lateinit var getBrands: GetBrands
 
     @Before
@@ -24,7 +24,7 @@ class GetBrandsTest {
     }
 
     @Test
-    fun `fetch brands list`()  = runTest{
+    fun `fetch brands list`() = runTest {
         val data = (1..10).map {
             Brand(
                 id = it,

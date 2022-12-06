@@ -1,8 +1,6 @@
 import java.lang.Runtime.Version
 
-object BuildGradle{
-
-}
+object BuildGradle
 
 object Deps{
     val appCompat by lazy{"androidx.core:core-ktx:${Versions.appCompat}"}
