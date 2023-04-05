@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
+enableFeaturePreview("VERSION_CATALOGS")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -20,3 +21,5 @@ include (":core:cache")
 include (":core:remote")
 include (":domain")
 include (":benchmark")
+include(":build-logic")
+include(":build-logic:convention")

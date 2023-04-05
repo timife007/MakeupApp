@@ -7,3 +7,12 @@ plugins {
 repositories {
     mavenCentral()
 }
+dependencies{
+
+}
+
+gradlePlugin{
+    plugins{
+
+    }
+}

@@ -18,7 +18,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
-
     }
     buildFeatures {
         viewBinding = true
@@ -36,6 +35,16 @@ android {
             signingConfig = signingConfigs.getByName("debug")
             matchingFallbacks.add("release")
             isDebuggable = false
+        }
+    }
+    productFlavors {
+        create("dev"){
+        }
+    }
+    applicationVariants.all{
+        val ext = when(flavorName){
+            "dev" -> ".devUrlExt"
+            else -> null
         }
     }
     compileOptions {
@@ -89,6 +98,7 @@ dependencies {
 
     //di
     implementation(Deps.hilt)
+    testImplementation("junit:junit:4.12")
     kapt(Deps.hiltAndroidCompiler)
     kapt (Deps.hiltCompiler)
     implementation(Deps.hiltNavigation)
@@ -137,13 +147,14 @@ dependencies {
     testImplementation (Deps.mockk)
 
     //Instrumentation Tests
-    androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation ("org.junit.jupiter:junit-jupiter")
-    androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
-    androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation(Deps.j5TestCore)
+    androidTestRuntimeOnly(Deps.j5TestRunner)
+    androidTestImplementation (Deps.espresso)
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test:rules:1.4.0")
     androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("com.google.truth:truth:1.0.1")
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    androidTestImplementation (Deps.truth)
+    androidTestImplementation (Deps.coroutinesTest)
     androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
 }
