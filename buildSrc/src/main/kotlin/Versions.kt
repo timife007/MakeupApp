@@ -1,6 +1,6 @@
 object Versions {
     const val kotlin = "1.6.10"
-    const val buildGradle = "7.2.1"
+    const val buildGradle = "7.4.0"
     const val appCompat = "1.3.0"
     const val coreKtx = "1.7.0"
     const val material = "1.7.0"
