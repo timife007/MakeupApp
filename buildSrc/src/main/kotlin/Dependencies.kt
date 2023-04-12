@@ -1,8 +1,6 @@
 import java.lang.Runtime.Version
 
-object BuildGradle{
-
-}
+object BuildGradle
 
 object Deps{
     val appCompat by lazy{"androidx.core:core-ktx:${Versions.appCompat}"}
@@ -39,11 +37,16 @@ object Deps{
     val jupiterEngine by lazy {"org.junit.jupiter:junit-jupiter-engine:${Versions.jupiter}"}
     val jupiterApi by lazy {"org.junit.jupiter:junit-jupiter-api:${Versions.jupiter}"}
     val jupiterParams by lazy {"org.junit.jupiter:junit-jupiter-params:${Versions.jupiter}"}
+    val j5TestRunner by lazy {"de.mannodermaus.junit5:android-test-runner:${Versions.j5TestRunner}"}
+    val j5TestCore by lazy {"de.mannodermaus.junit5:android-test-core:${Versions.j5TestRunner}"}
     val coroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"}
     val junitTest by lazy {"junit:junit:${Versions.junit}"}
     val junitExt by lazy {"androidx.test.ext:junit:${Versions.junitExt}"}
     val coreTest by lazy {"androidx.arch.core:core-testing:${Versions.core}"}
     val vintage by lazy { "org.junit.vintage:junit-vintage-engine:${Versions.jupiter}" }
-
+    val turbine by lazy {"app.cash.turbine:turbine:${Versions.turbine}"}
+    val mockk by lazy {"io.mockk:mockk:${Versions.mockk}"}
+    val truth by lazy {"com.google.truth:truth:${Versions.truth}"}
+    val espresso by lazy {"androidx.test.espresso:espresso-core:${Versions.espresso}"}
 
 }

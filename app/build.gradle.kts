@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = ConfigData. compileSdkVersion
     defaultConfig {
         applicationId = "com.timife.makeup"
         minSdk = ConfigData.minSdkVersion
@@ -18,7 +18,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["runnerBuilder"] = "de.mannodermaus.junit5.AndroidJUnit5Builder"
-
     }
     buildFeatures {
         viewBinding = true
@@ -38,12 +37,23 @@ android {
             isDebuggable = false
         }
     }
+//    productFlavors {
+//        create("dev"){
+//            val dimension = this.dimension.nameAsSafeName("dev").toString()
+//        }
+//    }
+    applicationVariants.all{
+        val ext = when(flavorName){
+            "dev" -> ".devUrlExt"
+            else -> null
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "11"
+        this.jvmTarget = "11"
     }
     testOptions {
         unitTests.all {
@@ -77,70 +87,75 @@ dependencies {
 
     implementation(project(":domain"))
 
-    implementation(Deps.coreKtx)
-    implementation(Deps.appCompat)
-    implementation (Deps.materialDesign)
-    implementation (Deps.constraintLayout)
+    implementation(libs.androidx.core.ktx)
+    implementation (libs.android.material)
+    implementation (libs.androidx.constraint)
+    add("implementation",libs.androidx.core.ktx)
 
 
 
-    implementation(Deps.legacy)
+    implementation(libs.androidx.legacy)
 
 
     //di
-    implementation(Deps.hilt)
-    kapt(Deps.hiltAndroidCompiler)
-    kapt (Deps.hiltCompiler)
-    implementation(Deps.hiltNavigation)
+    implementation(libs.hilt.android)
+    testImplementation(libs.junit.test)
+    kapt(libs.hilt.android.compiler)
+    kapt (libs.hilt.compiler)
+    implementation(libs.hilt.navigation)
 
     //Nav Component
-    implementation (Deps.navigationFragment)
-    implementation (Deps.navigationUi)
+    implementation (libs.androidx.navigation.fragment)
+    implementation (libs.androidx.navigation.ui)
 
     //Room
-    implementation (Deps.room)
-    implementation (Deps.roomKtx)
-    kapt (Deps.roomCompiler)
+    implementation (libs.room.runtime)
+    implementation (libs.room.ktx)
+    kapt (libs.room.compiler)
 
     //ViewModel
-    implementation (Deps.livedata)
+    implementation (libs.androidx.livedata)
 
     //Coroutines
-    implementation (Deps.coroutineCore)
-    implementation (Deps.coroutinesAndroid)
-    implementation (Deps.coroutinesPlay)
+    implementation (libs.coroutine.core)
+    implementation (libs.coroutine.android)
+    implementation (libs.coroutine.play)
 
 
 
-    implementation (Deps.lifecycle)
+    implementation (libs.androidx.lifecycle)
 
-    implementation (Deps.glide)
+    implementation (libs.glide)
 
-    annotationProcessor (Deps.glideCompiler)
+    annotationProcessor (libs.glide.compiler)
 
     // MAKE LIVE-DATA FIRE EVENTS ONLY ONCE
-    implementation (Deps.liveEvent)
+    implementation (libs.live.event)
 
     //Logging
-    implementation (Deps.timber)
+    implementation (libs.timber)
 
     //Tests
-    testImplementation (Deps.coroutinesTest)
-    testImplementation (Deps.jupiterParams)
-    testRuntimeOnly (Deps.jupiterApi)
-    testImplementation (Deps.jupiterEngine)
-    testImplementation (Deps.junitTest)
-    testImplementation (Deps.coreTest)
-    testRuntimeOnly (Deps.vintage)
+    testImplementation (libs.coroutine.test)
+    testImplementation (libs.jupiter.params)
+    testRuntimeOnly (libs.jupiter.api)
+    testImplementation (libs.jupiter.engine)
+    testImplementation (libs.junit.test)
+    testImplementation (libs.androidx.core.test)
+    testRuntimeOnly (libs.vintage)
+    testImplementation (libs.truth)
+    testImplementation (libs.turbine)
+    testImplementation (libs.mockk)
 
     //Instrumentation Tests
-    androidTestImplementation("androidx.test:runner:1.4.0")
     androidTestImplementation ("org.junit.jupiter:junit-jupiter")
-    androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.3.0")
-    androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.3.0")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("com.google.truth:truth:1.0.1")
-    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-    androidTestImplementation ("androidx.arch.core:core-testing:2.1.0")
+    androidTestImplementation(libs.junit5.test.core)
+    androidTestRuntimeOnly(libs.junit5.test.runner)
+    androidTestImplementation (libs.androidx.espresso)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation (libs.junit.ext)
+    androidTestImplementation (libs.truth)
+    androidTestImplementation (libs.coroutine.test)
+    androidTestImplementation (libs.androidx.core.test)
 }
