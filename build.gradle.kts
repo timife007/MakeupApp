@@ -5,12 +5,13 @@ buildscript{
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
     }
 }
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id ("com.android.application") version "7.2.1" apply false
-    id ("com.android.library") version "7.2.1" apply false
-    id ("org.jetbrains.kotlin.android") version "1.6.10" apply false
-    id ("com.google.dagger.hilt.android") version "2.41" apply false
-    id ("com.android.test") version "7.2.1" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.android.test) apply false
 }
 
 tasks.register(name = "type", type = Delete::class) {

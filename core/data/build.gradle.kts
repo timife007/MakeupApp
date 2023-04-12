@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+
     implementation(project(":core:cache"))
     implementation(project(":core:remote"))
 
@@ -43,8 +44,12 @@ dependencies {
     implementation (Deps.appCompat)
     implementation (Deps.materialDesign)
     testImplementation (Deps.junitTest)
-    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation (Deps.turbine)
+    testImplementation (Deps.mockk)
+    testImplementation (Deps.coroutinesTest)
+    testImplementation (Deps.truth)
+    androidTestImplementation ("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.0")
 
     //di
     implementation(Deps.hilt)

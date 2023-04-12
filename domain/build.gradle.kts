@@ -1,3 +1,4 @@
+
 plugins {
     id ("com.android.library")
     id ("org.jetbrains.kotlin.android")
@@ -42,6 +43,9 @@ dependencies {
     testImplementation (Deps.junitTest)
     androidTestImplementation(Deps.junitExt)
     androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    testImplementation (Deps.truth)
+    testImplementation (Deps.turbine)
+    testImplementation (Deps.coroutinesTest)
 
     //di
     implementation(Deps.hilt)
