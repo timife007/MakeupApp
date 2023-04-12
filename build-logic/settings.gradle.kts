@@ -1,3 +1,4 @@
+enableFeaturePreview("VERSION_CATALOGS")
 dependencyResolutionManagement {
     repositories {
         google()
@@ -11,4 +12,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "build-logic"
-//include(":convention")
+include(":convention")
+
